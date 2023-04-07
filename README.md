@@ -1,0 +1,1 @@
+# Tester-obrazkow-logicznych
