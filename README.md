@@ -15,3 +15,13 @@ Prosty program do testowania narysowanych obrazków logicznych.
 
 ## Wymagania
 - Visual Studio Version 16+
+
+## Przykład
+- Obrazek wejściowy:
+![test](./przyklady/test.bmp)
+
+- Obrazki wyjściowe:
+
+![test1](./przyklady/test1.bmp)
+![test2](./przyklady/test2.bmp)
+![test3](./przyklady/test3.bmp)
