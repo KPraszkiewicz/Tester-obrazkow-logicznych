@@ -15,9 +15,11 @@ public:
 	std::vector<std::vector<uchar>> dane;
 	enum TYP_POLA
 	{
+		NIEZNANE,
 		PUSTE,
-		KROPKA,
 		WYPELNIONE,
+
+
 		POZA_POLEM
 	};
 

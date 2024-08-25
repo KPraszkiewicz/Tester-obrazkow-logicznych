@@ -8,6 +8,8 @@ protected:
 	void poziom(Obrazek& obr, int y);
 	void pion(Obrazek& obr, int x);
 	virtual void linia(Obrazek& obr, const std::vector<uchar>& liczby, int x, int y, int dx, int dy) {};
+
+	//std::vector<int> wyznacz_minimanle(Obrazek& obr, const std::vector<uchar>& liczby);
 public:
 	virtual void operator()(Obrazek& obr) {};
 

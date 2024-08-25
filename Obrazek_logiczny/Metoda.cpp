@@ -49,7 +49,7 @@ void Metoda_p1::linia(Obrazek& obr, const std::vector<uchar>& liczby, int x, int
 		{
 			w += 1;
 		}
-		else if (p == Obrazek::KROPKA)
+		else if (p == Obrazek::PUSTE)
 		{
 			// czyszczenie bufora - nie jest potrzebne
 			/*
@@ -71,7 +71,7 @@ void Metoda_p1::linia(Obrazek& obr, const std::vector<uchar>& liczby, int x, int
 			uchar pop = obr.pobierz_dane(x + dx * (i - 1), y + dy * (i - 1));
 			switch (pop)
 			{
-			case Obrazek::PUSTE:
+			case Obrazek::NIEZNANE:
 				// do zmiany
 				break;
 			case Obrazek::WYPELNIONE:
@@ -98,9 +98,9 @@ void Metoda_p1::linia(Obrazek& obr, const std::vector<uchar>& liczby, int x, int
 				int start = i + 1;
 				int koniec = i - l;
 				if (start < wym)
-					obr.ustaw_dane(x + dx * start, y + dy * start, obr.KROPKA);
+					obr.ustaw_dane(x + dx * start, y + dy * start, obr.PUSTE);
 				if (koniec >= 0)
-					obr.ustaw_dane(x + dx * koniec, y + dy * koniec, obr.KROPKA);
+					obr.ustaw_dane(x + dx * koniec, y + dy * koniec, obr.PUSTE);
 			}
 			if (l <= puste)
 			{
@@ -135,7 +135,7 @@ void Metoda_p1::linia(Obrazek& obr, const std::vector<uchar>& liczby, int x, int
 			w += 1;
 			
 		}
-		else if (p == Obrazek::KROPKA)
+		else if (p == Obrazek::PUSTE)
 		{
 			w = 0;
 		}
@@ -146,7 +146,7 @@ void Metoda_p1::linia(Obrazek& obr, const std::vector<uchar>& liczby, int x, int
 				uchar pop = obr.pobierz_dane(x + dx * (i+1), y + dy * (i+1));
 				switch (pop)
 				{
-				case Obrazek::PUSTE:
+				case Obrazek::NIEZNANE:
 					pewniak = false;
 					break;
 				case Obrazek::WYPELNIONE:
@@ -175,9 +175,9 @@ void Metoda_p1::linia(Obrazek& obr, const std::vector<uchar>& liczby, int x, int
 				int start = i - 1;
 				int koniec = i + l;
 				if (start >= 0)
-					obr.ustaw_dane(x + dx * start, y + dy * start, obr.KROPKA);
+					obr.ustaw_dane(x + dx * start, y + dy * start, obr.PUSTE);
 				if (koniec < wym)
-					obr.ustaw_dane(x + dx * koniec, y + dy * koniec, obr.KROPKA);
+					obr.ustaw_dane(x + dx * koniec, y + dy * koniec, obr.PUSTE);
 			}
 			
 			if (--akt < 0)
@@ -205,7 +205,6 @@ void Metoda_p1::operator()(Obrazek& obr)
 	}
 }
 
-
 void Metoda_s1::linia(Obrazek& obr, const std::vector<uchar>& liczby, int x, int y, int dx, int dy)
 {
 	const auto wym = (dx == 0) ? obr.wym_y : obr.wym_x;
@@ -232,10 +231,10 @@ void Metoda_s1::linia(Obrazek& obr, const std::vector<uchar>& liczby, int x, int
 			odleglosc = 0;
 			
 			break;
-		case Obrazek::KROPKA:
+		case Obrazek::PUSTE:
 			odleglosc = ODL_MAX;
 			//break;
-		case Obrazek::PUSTE:
+		case Obrazek::NIEZNANE:
 			odleglosc += 1;
 			if (nowa.dl > 0)
 			{
@@ -264,7 +263,7 @@ void Metoda_s1::linia(Obrazek& obr, const std::vector<uchar>& liczby, int x, int
 		case Obrazek::WYPELNIONE:
 			odleglosc = 0;
 			break;
-		case Obrazek::KROPKA:
+		case Obrazek::PUSTE:
 		case Obrazek::POZA_POLEM:
 			odleglosc = ODL_MAX;
 			if (dl_wyspy > 0)
@@ -276,7 +275,7 @@ void Metoda_s1::linia(Obrazek& obr, const std::vector<uchar>& liczby, int x, int
 				dl_wyspy = 0;
 			}
 			break;
-		case Obrazek::PUSTE:
+		case Obrazek::NIEZNANE:
 			odleglosc += 1;
 			if (odleglosci[i] >= ODL_MAX)
 			{
@@ -368,7 +367,7 @@ void Metoda_s1::linia(Obrazek& obr, const std::vector<uchar>& liczby, int x, int
 					return false;
 				}
 			}
-			else if (p == Obrazek::KROPKA)
+			else if (p == Obrazek::PUSTE)
 			{
 				if (bi != 0xff)
 				{
@@ -526,7 +525,7 @@ void Metoda_s1::linia(Obrazek& obr, const std::vector<uchar>& liczby, int x, int
 		auto p = prawa[i];
 		if (l == 0xff && p == 0xff && otwarte.empty())
 		{
-			obr.ustaw_dane(x + dx * i, y + dy * i, Obrazek::KROPKA);
+			obr.ustaw_dane(x + dx * i, y + dy * i, Obrazek::PUSTE);
 		}
 		if (l != 0xff)
 		{
