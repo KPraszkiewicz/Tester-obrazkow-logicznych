@@ -39,7 +39,10 @@ int main(int argc, char* argv[])
 	Metoda_p1 m1; 
 	Metoda_s1 m2;
 	Obrazek_rysunek obrr;
-	std::filesystem::create_directories("./tmp/");
+	std::filesystem::path program_path{ argv[0] };
+	std::filesystem::create_directories(program_path.parent_path() / "tmp/");
+	std::cout << "argv[0]: " << argv[0] << std::endl;
+	std::cout << "tmp/path: " << (program_path.parent_path() / "tmp/").string() << std::endl;
 	for (int i = 0; i < ilosc_iteracji; i++)
 	{
 		m2(obrazek);
